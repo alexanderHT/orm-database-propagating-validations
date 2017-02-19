@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+      <style media="screen">
+        nav{
+          margin-bottom: 20px;
+        }
+      </style>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+      <!-- navbar -->
+      <nav class="blue">
+        <div class="nav-wrapper">
+          <div class="container">
+            <a href="index.html" class="brand-logo">SUPER EVENT</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="index.html">Form</a></li>
+              <li><a href="event.html">List Event</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- navbar -->
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+                <th data-field="event_name">Event Name</th>
+                <th data-field="event_title">Event Title</th>
+                <th data-field="email">Email</th>
+                <th data-field="date">Date</th>
+            </tr>
+          </thead>
+          <tbody id="list-event">
+          </tbody>
+        </table>
+      </div>
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+      <!-- custome javascript -->
+      <script type="text/javascript">
+        $.ajax({
+          url: "http://localhost:3000/api/events",
+          type: "get",
+          success: function( result ) {
+            var temp = "";
+            for (var i = 0; i < result.length; i++) {
+              temp += `<tr id="${result[i]._id}">
+                        <td>${result[i].event_name}</td>
+                        <td>${result[i].event_title}</td>
+                        <td>${result[i].email}</td>
+                        <td>${result[i].event_create_at}</td>
+                      </tr>`
+            }
+            $('#list-event').append(temp)
+          }
+        });
+      </script>
+    </body>
+  </html>
