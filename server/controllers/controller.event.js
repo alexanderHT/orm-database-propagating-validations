@@ -20,11 +20,13 @@ var controllerEvent = {
 
       // save event
       newEvent.save(function(err, data){
-        if       (err.errors.event_create_at.message) { res.json(err.errors.event_create_at.message);  }
-        else if  (err.errors.email.message)           { res.json(err.errors.email.message);  }
-        else if  (err.errors.event_title.message)     { res.json(err.errors.event_title.message);  }
-        else if  (err.errors.event_name.message)      { res.json(err.errors.event_name.message); }
-        else if  (data)                               { res.json(data) }
+        if (err) res.json(err)
+        res.json(data)
+        // if       (err.errors.event_create_at.message) { res.json(err.errors.event_create_at.message);  }
+        // else if  (err.errors.email.message)           { res.json(err.errors.email.message);  }
+        // else if  (err.errors.event_title.message)     { res.json(err.errors.event_title.message);  }
+        // else if  (err.errors.event_name.message)      { res.json(err.errors.event_name.message); }
+        // else if  (data)                               { res.json(data) }
       })
 
     }
